@@ -1,0 +1,231 @@
+header,
+section,
+footer,
+aside,
+nav,
+article,
+figure,
+figcaption {
+  display: block;
+}
+
+body {
+  color: #666666;
+  background-color: black;
+  background-image: url("./images/bg-pattern.jpg");
+  background-position: center;
+  font-family: "OpenSans", "Inter", sans-serif;
+  line-height: 1.4em;
+  margin: 0px;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 96px auto;
+  background-color: #ffffff;
+  box-shadow: -20px 10px 20px -16px rgba(0, 0, 0, 0.4);
+}
+
+header {
+  height: 360px;
+  background-image: url("./images/bg-header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header .title {
+  border: 8px solid white;
+  padding: 4px;
+  width: 40%;
+  margin: auto 5% auto;
+}
+
+header .title .content {
+  padding: 2px;
+  background: white;
+  padding: 0 28px 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  border: 2px solid #64dd17;
+}
+
+header .title .content h1 {
+  font-weight: 600;
+  font-size: 64px;
+  color: #000000;
+  margin: 28px 0;
+  padding: 0;
+  font-family: "Lobster";
+  color: #64dd17;
+}
+
+header .title .content p {
+  margin-top: 24px;
+  font-size: 12px;
+  text-align: left;
+  margin: 0 0 12px;
+  line-height: normal;
+  font-style: italic;
+}
+
+nav,
+footer {
+  clear: both;
+  color: #ffffff;
+  background-color: #b2ff59;
+  margin: 0;
+}
+
+footer {
+  height: 30px;
+  color: #000000;
+}
+
+nav {
+  height: 48px;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+nav li {
+  display: inline;
+  margin-right: 40px;
+}
+
+nav li a {
+  color: #40a700;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+nav li a:hover,
+nav li a.current {
+  color: #000000;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+section.courses {
+  float: left;
+  width: 60%;
+  border-right: 1 px solid #eeeeee;
+}
+
+article {
+  clear: both;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(64, 167, 0, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 28px;
+  background-color: white;
+}
+
+article:hover {
+  border-bottom: 1px solid rgba(64, 167, 0, 1.0);
+}
+
+hgroup {
+  margin-top: 40px;
+}
+
+figure {
+  float: left;
+  width: 290px;
+  height: 220px;
+  padding: 5px;
+  margin: 20px;
+}
+
+figure a img {
+  height: 100%;
+  object-fit: cover;
+}
+
+figcaption {
+  font-size: 12px;
+  text-align: center;
+}
+
+figcaption a {
+  color: #40a700;
+}
+
+.item-desc h2 {
+  font-weight: 800;
+  color: #000000;
+  font-size: 28px;
+}
+
+.item-desc h3 {
+  color: #40a700;
+  font-size: 18px;
+}
+
+aside {
+  width: 20%;
+  float: left;
+  padding: 0px 0px 0px 20 px;
+  margin-left: 4%;
+}
+
+aside section a {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+aside section a:hover {
+  color: #40a700;
+  font-weight: 800;
+  background-color: #efefef;
+}
+
+a {
+  color: #40a700;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: normal;
+}
+
+h2 {
+  margin: 10px 0px 5px 0px;
+  padding: 0px;
+}
+
+h3 {
+  margin: 0px 0px 10px 0px;
+  color: #40a700;
+}
+
+aside h2 {
+  font-weight: 800;
+  padding: 30px 0px 10px 0px;
+  color: #40a700;
+}
+
+footer {
+  font-size: 80%;
+  padding: 7px 0px 0px 20px;
+}
