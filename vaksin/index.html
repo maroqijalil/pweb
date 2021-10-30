@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" type="text/css" />
+    <title>Validasi Vaksinasi</title>
+  </head>
+
+  <body class="font-sans antialiased w-full bg-yellow-50">
+    <div class="container mx-auto max-w-screen-2xl text-black">
+      <main class="flex
+        md:flex-row
+        sm:flex-col sm:m-12
+        bg-white
+        rounded-xl
+        items-stretch
+        shadow-lg">
+        <img class="flex-1
+          md:w-8
+          sm:w-full sm:rounded-t-xl
+          md:rounded-t-none md:rounded-l-xl
+          object-cover" src="./assets/bg.jpeg" />
+
+        <div class="flex flex-col px-16 py-12">
+          <h1 class="font-bold text-4xl sm:text-center mb-8">
+            Formulir Status Vaksinasi Mahasiswa
+          </h1>
+
+          <form x-data="{password: '',password_confirm: ''}">
+            <div class="sm:mx-auto md:mx-0 sm:max-w-lg md:max-w-xl">
+              <div class="py-1" x-data="{ name : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">Nama
+                  <div x-show="name.length > 0" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <input placeholder="Masukkan Nama Anda" type="text" x-model="name"
+                  id="nama" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none" />
+              </div>
+
+              <div class="py-1" x-data="{ nrp : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">NRP
+                  <div x-show="nrp.length > 0 && nrp.length < 14" class='w-2 h-2 bg-red-400 rounded-full ml-2'></div>
+                  <div x-show="nrp.length == 14" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <input placeholder="Masukkan NRP 14 digit" type="text" x-model="nrp"
+                  id="nrp" minlength="14" maxlength="14" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none" />
+              </div>
+
+              <div class="py-1" x-data="{ alamat : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">Alamat
+                  <div x-show="alamat.length > 0" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <input placeholder="Masukkan Alamat Asal" type="text" x-model="alamat"
+                  id="alamat" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none" />
+              </div>
+
+              <div class="py-1" x-data="{ domisili : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">Domisili
+                  <div x-show="domisili.length > 0" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <input placeholder="Masukkan Alamat Domisili" type="text" x-model="domisili"
+                  id="domisili" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none" />
+              </div>
+
+              <div class="py-1" x-data="{ email : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">Email
+                  <div x-show="email.length > 0" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <input placeholder="Masukkan Email Anda" type="email" x-model="email"
+                  id="email" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none" />
+              </div>
+
+              <div class="py-1" x-data="{ jurusan : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">Jurusan
+                  <div x-show="jurusan != 0" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <select x-model="jurusan"
+                  id="jurusan" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none">
+                  <option value="0">Pilih Jurusan Anda</option>
+                  <option value="1">Fisika</option>
+                  <option value="2">Matematika</option>
+                  <option value="3">Statistika</option>
+                  <option value="4">Kimia</option>
+                  <option value="5">Biologi</option>
+                  <option value="6">Aktuaria</option>
+                  <option value="7">Teknik Perkapalan</option>
+                  <option value="8">Teknik Sistem Perkapalan</option>
+                  <option value="9">Teknik Kelautan</option>
+                  <option value="10">Teknik Transportasi Laut</option>
+                  <option value="11">Teknik Mesin</option>
+                  <option value="12">Teknik Kimia</option>
+                  <option value="13">Teknik Fisika</option>
+                  <option value="14">Teknik Sistem dan Industri</option>
+                  <option value="15">Teknik Material</option>
+                  <option value="16">Teknik Elektro</option>
+                  <option value="17">Teknik Biomedik</option>
+                  <option value="18">Teknik Komputer</option>
+                  <option value="19">Teknik Informatika</option>
+                  <option value="20">Sistem Informasi</option>
+                  <option value="21">Teknologi Informasi</option>
+                  <option value="22">Teknik Sipil</option>
+                  <option value="23">Arsitektur</option>
+                  <option value="24">Teknik Lingkungan</option>
+                  <option value="25">Perencanaan Wilayah dan Kota</option>
+                  <option value="26">Teknik Geomatika</option>
+                  <option value="27">Teknik Geofisika</option>
+                  <option value="28">Desain Produk Industri</option>
+                  <option value="29">Desain Interior</option>
+                  <option value="30">Desain Komunikasi Visual</option>
+                  <option value="31">Manajemen Bisnis</option>
+                  <option value="32">Studi Pembangunan</option>
+                  <option value="33">Manajemen Teknologi</option>
+                </select>
+              </div>
+
+              <div class="py-1" x-data="{ status : '' }">
+                <span class="flex flex-row px-1 items-center text-sm text-gray-600">Status
+                  <div x-show="status != 0" class='w-2 h-2 bg-green-400 rounded-full ml-2'></div>
+                </span>
+                <select x-model="status"
+                  id="status" class="text-md
+                  block
+                  px-3
+                  py-2
+                  rounded-lg
+                  w-full
+                  bg-white
+                  border-2 border-gray-300
+                  placeholder-gray-600
+                  shadow-md
+                  focus:placeholder-gray-500
+                  focus:bg-white
+                  focus:border-gray-600
+                  focus:outline-none">
+                  <option value="0">Pilih Status Vaksinasi</option>
+                  <option value="1">Belum Vaksin</option>
+                  <option value="2">Vaksin Dosis 1</option>
+                  <option value="3">Vaksin Dosis 2</option>
+                </select>
+              </div>
+
+              <div class="flex justify-start">
+                <label class="block text-gray-500 font-bold my-4
+                  flex items-center">
+                  <input class="leading-loose text-pink-600 top-0"
+                    type="checkbox" id="konfirmasi"/>
+                  <span class="ml-2 text-sm py-2 text-gray-600
+                    text-left">
+                    Saya menyatakan bahwa: Saya mengisi data dengan benar dan jujur.
+                  </span>
+                </label>
+              </div>
+              <button class="mt-3
+                text-lg
+                font-semibold
+                bg-gray-800
+                w-full
+                text-white
+                rounded-lg
+                px-6
+                py-3
+                block
+                shadow-xl
+                hover:text-white hover:bg-black"
+                @click="submit">
+                Kirim
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+    
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script type="text/javascript">
+      function submit() {
+        let nama = document.getElementById('nama').value;
+        let nrp = document.getElementById('nrp').value;
+        let alamat = document.getElementById('alamat').value;
+        let domisili = document.getElementById('domisili').value;
+        let email = document.getElementById('email').value;
+        let jurusan = document.getElementById('jurusan').value;
+        let status = document.getElementById('status').value;
+        let konfirmasi = document.getElementById('konfirmasi').checked;
+
+        let isValid = true;
+        
+        if (nama == '') {
+          isValid = false;
+        }
+        if (nrp == '') {
+          isValid = false;
+        }
+        if (alamat == '') {
+          isValid = false;
+        }
+        if (domisili == '') {
+          isValid = false;
+        }
+        if (email == '') {
+          isValid = false;
+        }
+        if (jurusan == '') {
+          isValid = false;
+        }
+        if (status == '') {
+          isValid = false;
+        }
+
+        if (isValid) {
+          if (konfirmasi) {
+            alert('Terimakasih ' + nama + ", data Anda telah terekam");
+          } else {
+            alert('Centang pernyataan kejujuran!');
+          }
+        } else {
+          alert('Isi isian dengan benar!');
+        }
+      }
+    </script>
+  </body>
+
+</html>
