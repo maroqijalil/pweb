@@ -27,7 +27,7 @@
               <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Selamat Datang pada Portal Penerimaan Mahasiswa Baru ITS
               </h1>
-              <form method="POST" action="<?= CONTROLLER . 'auth/auth.php' ?>">
+              <form method="POST" action="">
                 <label class="block text-sm">
                   <span class="block text-sm font-medium text-gray-700">Email address</span>
                   <div class="mt-1">

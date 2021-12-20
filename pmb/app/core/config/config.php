@@ -8,9 +8,3 @@ define('DB_HOST', "localhost");
 define('DB_USER', "root");
 define('DB_PASS', "root");
 define('DB_NAME', "pmb_its");
-
-define("PRESENTATION", URL . 'presentation/');
-define("ASSET", PRESENTATION . 'assets/');
-define("CONTROLLER", PRESENTATION . 'controllers/');
-
-define("CORE", URL . 'core/');

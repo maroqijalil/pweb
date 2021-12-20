@@ -1,5 +1,7 @@
 <?php
 
+require APP . 'presentation/controllers/auth/auth.php';
+
 switch ($_SERVER['REQUEST_URI']) {
   case '/masuk':
     require APP . 'presentation/views/auth/login.php';
