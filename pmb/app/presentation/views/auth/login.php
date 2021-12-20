@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }" x-data="data()">
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -8,10 +8,10 @@
   <title>Portal PMB</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="<?= URL . '/assets/css/app.css' ?>" />
+  <link rel="stylesheet" href="<?= URL . 'assets/css/app.css' ?>" />
 
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.2.1/dist/alpine.js" defer></script>
-  <script src="<?= URL . '/assets/js/app.js' ?>"></script>
+  <script src="<?= URL . 'assets/js/app.js' ?>"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
       <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div class="flex flex-col overflow-y-auto md:flex-row">
           <div class="h-32 md:h-auto md:w-1/2">
-            <img aria-hidden="true" class="object-cover w-full h-full" src="<?= URL . '/assets/img/bg-card' ?>.jpg" alt="Office" />
+            <img aria-hidden="true" class="object-cover w-full h-full" src="<?= URL . 'assets/img/bg-card' ?>.jpg" alt="Office" />
           </div>
           <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
@@ -106,15 +106,15 @@
               </form>
 
               <p class="mt-4">
-              <div class="text-sm">
-                <a href="/daftar" class="
-                    font-medium
-                    text-sp-primary-400
-                    hover:text-sp-primary-300
-                  ">
-                  Belum punya Akun? Daftar
-                </a>
-              </div>
+                <div class="text-sm">
+                  <a href="/daftar" class="
+                      font-medium
+                      text-sp-primary-400
+                      hover:text-sp-primary-300
+                    ">
+                    Belum punya Akun? Daftar
+                  </a>
+                </div>
               </p>
             </div>
           </div>
