@@ -7,6 +7,8 @@ require APP . 'presentation/controllers/auth/auth.php';
 switch ($_SERVER['REQUEST_URI']) {
   case '/':
     if (!authenticate()) {
+      $students = studentAll();
+
       require APP . 'presentation/views/main/index.php';
     }
     break;

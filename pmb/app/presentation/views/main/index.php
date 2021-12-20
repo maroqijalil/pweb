@@ -67,17 +67,19 @@
       <main class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
           <h2 class="mt-6 text-3xl font-bold text-gray-900">
-            Data Kategori Produk
+            Data Calon Mahasiswa
           </h2>
           <!-- CTA -->
-          <a class="mt-6 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-sp-primary-50 bg-sp-primary-100 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple" href="#" id="add-category">
+          <a class="mt-6 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-black bg-sp-primary-100 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple" href="#" id="add-category">
             <div class="flex items-center gap-2">
 
-              <span>Jumlah Kategori</span>
+              <span><?php mysqli_num_rows($students); ?> Mahasiswa</span>
             </div>
             <span class="flex items-center gap-2">
-              <p>Tambah Kategori</p>
-
+              <p>Tambah Mahasiswa</p>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
             </span>
           </a>
 
@@ -86,30 +88,50 @@
               <table class="w-full whitespace-no-wrap">
                 <thead>
                   <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                    <th class="px-4 py-3 w-3/4">Nama</th>
-                    <th class="px-4 py-3 w-1/4">Aksi</th>
+                    <th class="px-4 py-3 w-3/12">Nama</th>
+                    <th class="px-4 py-3 w-2/12">Alamat</th>
+                    <th class="px-4 py-3 w-2/12">Agama</th>
+                    <th class="px-4 py-3 w-2/12">Asal</th>
+                    <th class="px-4 py-3 w-2/12">Departemen</th>
+                    <th class="px-4 py-3 w-1/12">Aksi</th>
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                  <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm cursor-pointer">
-                        <div>
-                          <p class="font-semibold">Nama</p>
+                  <?php while ($student = mysqli_fetch_array($students)) { ?>
+                    <tr class="text-gray-700 dark:text-gray-400">
+                      <td class="px-4 py-3">
+                        <div class="flex items-center text-sm cursor-pointer">
+                          <div>
+                            <p class="font-semibold"><?= $student['name'] ?></p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                              <?= $student['gender'] ?>
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm flex gap-3">
-                      <button class="px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red" id="delete-category" data-id="{{ $category->product_category_id }}">
-                        Hapus
-                      </button>
-                    </td>
-                  </tr>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <?= $student['address'] ?>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <?= $student['religion'] ?>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <?= $student['school'] ?>
+                      </td>
+                      <td class="px-4 py-3 text-sm">
+                        <?= $student['department'] ?>
+                      </td>
+                      <td class="px-4 py-3 text-sm flex gap-3">
+                        <button class="px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red" id="delete-category" data-id="{{ $category->product_category_id }}">
+                          Hapus
+                        </button>
+                      </td>
+                    </tr>
+                  <?php } ?>
 
                   <div class="fixed inset-0 z-30 hidden items-end bg-black bg-opacity-50 sm:items-center sm:justify-center" id="modal-delete-category-{{ $category->product_category_id }}">
                     <div class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl" role="dialog" id="modal">
-
                       <header class="flex justify-end">
                         <button class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700" aria-label="close" id="modal-close-button" data-id="{{ $category->product_category_id }}">
                           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" role="img" aria-hidden="true">
@@ -118,10 +140,8 @@
                         </button>
                       </header>
 
-                      <!-- Modal body -->
                       <div class="mt-4 mb-6">
 
-                        <!-- Modal title -->
                         <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
                           Hapus Kategori
                         </p>
@@ -164,10 +184,8 @@
               </button>
             </header>
 
-            <!-- Modal body -->
             <div class="mt-4">
 
-              <!-- Modal title -->
               <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
                 Tambah Kategori
               </p>
