@@ -64,7 +64,7 @@
                   <li class="flex mt-2">
                     <form method="POST" action="" class="inline-flex items-center w-full">
                       <input name="logout" type="hidden">
-                  
+
                       <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                         href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                         <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -94,7 +94,6 @@
           <a class="mt-6 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-white bg-sp-primary-400 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
             href="#" id="add-student">
             <div class="flex items-center gap-2">
-
               <span><?php count($students); ?> Mahasiswa</span>
             </div>
             <span class="flex items-center gap-2">
@@ -152,6 +151,16 @@
                     </td>
                     <td class="px-4 py-3 text-sm flex gap-3">
                       <button
+                        class="bg-sp-primary-400 px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                        type="button" id="update-student" data-id="<?= $student['student_id'] ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        </a>
+                      </button>
+                      <button
                         class="px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
                         id="delete-student" data-id="<?= $student['student_id'] ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -182,11 +191,9 @@
                       </header>
 
                       <div class="mt-4 mb-6">
-
                         <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
                           Hapus data Calon Mahasiswa
                         </p>
-
                         <p class="text-sm text-gray-700 dark:text-gray-400">
                           Apakah Anda ingin menghapus data <?= $student['name'] ?>?
                         </p>
@@ -208,6 +215,114 @@
                           </button>
                         </form>
                       </footer>
+                    </div>
+                  </div>
+
+                  <div
+                    class="fixed inset-0 z-30 hidden items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
+                    id="modal-update-student-<?= $student['student_id'] ?>">
+                    <div
+                      class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl"
+                      role="dialog" id="modal">
+
+                      <header class="flex justify-end">
+                        <button
+                          class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
+                          aria-label="close" id="update-student-close" data-id="<?= $student['student_id'] ?>">
+                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" role="img" aria-hidden="true">
+                            <path
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd" fill-rule="evenodd"></path>
+                          </svg>
+                        </button>
+                      </header>
+
+                      <div class="mt-4">
+
+                        <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
+                          Edit Daftar Calon Mahasiswa
+                        </p>
+
+                        <form method="POST" action="">
+                          <input type="hidden" name="student_id" value="<?= $student['student_id'] ?>">
+
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                              Nama
+                            </span>
+                            <input
+                              class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                              name="name" value="<?= $student['name'] ?>" placeholder="Nama" required />
+                          </label>
+
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                              Alamat
+                            </span>
+                            <textarea
+                              class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                              name="address" value="<?= $student['address'] ?>" rows="2" placeholder="Alamat"
+                              required><?= $student['address'] ?></textarea>
+                          </label>
+
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                              Jenis Kelamin
+                            </span>
+                            <select
+                              class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                              name="gender" placeholder="Jenis Kelamin" required value="<?= $student['gender'] ?>">
+                              <?php if ($student['gender'] == 'L') { ?>
+                              <option value="L" selected>Laki-laki</option>
+                              <option value="P">Perempuan</option>
+                              <?php } else if ($student['gender'] == 'P') { ?>
+                              <option value="L">Laki-laki</option>
+                              <option value="P" selected>Perempuan</option>
+                              <?php } ?>
+                            </select>
+                          </label>
+
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                              Agama
+                            </span>
+                            <input
+                              class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                              name="religion" value="<?= $student['religion'] ?>" placeholder="Agama" required />
+                          </label>
+
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                              Asal Sekolah
+                            </span>
+                            <input
+                              class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                              name="school" value="<?= $student['school'] ?>" placeholder="Asal Sekolah" required />
+                          </label>
+
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400">
+                              Departemen
+                            </span>
+                            <input
+                              class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                              name="department" value="<?= $student['department'] ?>" placeholder="Departemen" required />
+                          </label>
+
+                          <footer
+                            class="flex flex-col items-center justify-end gap-2 sm:flex-row bg-white dark:bg-gray-800 mt-6">
+                            <button id="update-student-close" data-id="<?= $student['student_id'] ?>" type="button"
+                              class="w-full px-5 py-3 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border border-gray-400 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
+                              Batal
+                            </button>
+
+                            <button type="submit" name="update_student"
+                              class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-sp-primary-400 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-sp-primary-400 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple m-0">
+                              Simpan
+                            </button>
+                          </footer>
+                        </form>
+                      </div>
                     </div>
                   </div>
                   <?php } ?>
@@ -342,6 +457,16 @@
 
       $("body").on('click', "#add-student-close", function (e) {
         $(`#modal-add-student`).removeClass('flex').addClass('hidden');
+      });
+
+      $("body").on('click', "#update-student", function (e) {
+        var studentId = $(this).data(("id"));
+        $(`#modal-update-student-${studentId}`).removeClass('hidden').addClass('flex');
+      });
+
+      $("body").on('click', "#update-student-close", function (e) {
+        var studentId = $(this).data(("id"));
+        $(`#modal-update-student-${studentId}`).removeClass('flex').addClass('hidden');
       });
     });
   </script>
