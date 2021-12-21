@@ -3,6 +3,7 @@
 require APP . 'presentation/middleware/auth/auth.php';
 
 require APP . 'presentation/controllers/auth/auth.php';
+require APP . 'presentation/controllers/main/student.php';
 
 switch ($_SERVER['REQUEST_URI']) {
   case '/':

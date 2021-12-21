@@ -5,7 +5,11 @@ function studentAll()
   $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
   $sql = "SELECT * FROM students";
-  return mysqli_query($db, $sql);
+  $stmt = $db->prepare($sql);
+
+  $stmt->execute();
+  
+  return $stmt->fetchAll();
 }
 
 function studentInsert()
@@ -13,22 +17,28 @@ function studentInsert()
   $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
   $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-  $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-  $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+  $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
+  $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
+  $religion = filter_input(INPUT_POST, 'religion', FILTER_SANITIZE_STRING);
+  $school = filter_input(INPUT_POST, 'school', FILTER_SANITIZE_STRING);
+  $department = filter_input(INPUT_POST, 'department', FILTER_SANITIZE_STRING);
 
-  $sql = "INSERT INTO users (name, email, password) 
-          VALUES (:name, :email, :password)";
+  $sql = "INSERT INTO students (name, address, gender, religion, school, department) 
+          VALUES (:name, :address, :gender, :religion, :school, :department)";
   $stmt = $db->prepare($sql);
 
   $params = array(
     ":name" => $name,
-    ":password" => $password,
-    ":email" => $email
+    ":address" => $address,
+    ":gender" => $gender,
+    ":religion" => $religion,
+    ":school" => $school,
+    ":department" => $department,
   );
 
   $saved = $stmt->execute($params);
 
   if ($saved) {
-    header("Location: /masuk");
+    header("Location: /");
   };
 }
