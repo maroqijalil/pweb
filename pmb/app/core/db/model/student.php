@@ -8,13 +8,12 @@ function studentAll()
   $stmt = $db->prepare($sql);
 
   $stmt->execute();
-  
+
   return $stmt->fetchAll();
 }
 
 function studentInsert()
 {
-  $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
   $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
   $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
@@ -23,24 +22,28 @@ function studentInsert()
   $school = filter_input(INPUT_POST, 'school', FILTER_SANITIZE_STRING);
   $department = filter_input(INPUT_POST, 'department', FILTER_SANITIZE_STRING);
 
-  $sql = "INSERT INTO students (name, address, gender, religion, school, department) 
-          VALUES (:name, :address, :gender, :religion, :school, :department)";
-  $stmt = $db->prepare($sql);
+  if ($name && $address && $gender && $religion && $school && $department) {
+    $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
-  $params = array(
-    ":name" => $name,
-    ":address" => $address,
-    ":gender" => $gender,
-    ":religion" => $religion,
-    ":school" => $school,
-    ":department" => $department,
-  );
+    $sql = "INSERT INTO students (name, address, gender, religion, school, department) 
+            VALUES (:name, :address, :gender, :religion, :school, :department)";
+    $stmt = $db->prepare($sql);
 
-  $saved = $stmt->execute($params);
+    $params = array(
+      ":name" => $name,
+      ":address" => $address,
+      ":gender" => $gender,
+      ":religion" => $religion,
+      ":school" => $school,
+      ":department" => $department,
+    );
 
-  if ($saved) {
-    header("Location: /");
-  };
+    $saved = $stmt->execute($params);
+
+    if ($saved) {
+      header("Location: /");
+    };
+  }
 }
 
 function studentDelete()
@@ -65,8 +68,6 @@ function studentDelete()
 
 function studentUpdate()
 {
-  $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-
   $id = filter_input(INPUT_POST, 'student_id', FILTER_VALIDATE_INT);
   $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
   $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
@@ -75,7 +76,10 @@ function studentUpdate()
   $school = filter_input(INPUT_POST, 'school', FILTER_SANITIZE_STRING);
   $department = filter_input(INPUT_POST, 'department', FILTER_SANITIZE_STRING);
 
-  $sql = "UPDATE students
+  if ($name && $address && $gender && $religion && $school && $department) {
+    $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+
+    $sql = "UPDATE students
           SET name=:name,
           address=:address,
           gender=:gender,
@@ -83,21 +87,22 @@ function studentUpdate()
           school=:school,
           department=:department
           WHERE student_id=:student_id";
-  $stmt = $db->prepare($sql);
+    $stmt = $db->prepare($sql);
 
-  $params = array(
-    ":student_id" => $id,
-    ":name" => $name,
-    ":address" => $address,
-    ":gender" => $gender,
-    ":religion" => $religion,
-    ":school" => $school,
-    ":department" => $department,
-  );
+    $params = array(
+      ":student_id" => $id,
+      ":name" => $name,
+      ":address" => $address,
+      ":gender" => $gender,
+      ":religion" => $religion,
+      ":school" => $school,
+      ":department" => $department,
+    );
 
-  $stmt->execute($params);
+    $stmt->execute($params);
 
-  if ($stmt->rowCount() > 0) {
-    header("Location: /");
-  };
+    if ($stmt->rowCount() > 0) {
+      header("Location: /");
+    };
+  }
 }
