@@ -52,3 +52,10 @@ function register()
     header("Location: /masuk");
   };
 }
+
+function logout()
+{
+  session_start();
+  unset($_SESSION['user']);
+  header("Location: /masuk");
+}

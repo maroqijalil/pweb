@@ -55,6 +55,7 @@
                   src="https://cdn1-production-images-kly.akamaized.net/NpSkxEAUZsogHK1-HG4KlurfdSM=/0x248:2423x1613/640x360/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3412481/original/055674500_1616773504-115383249_m.jpeg"
                   alt="" aria-hidden="true" />
               </button>
+
               <template x-if="isProfileMenuOpen">
                 <ul x-transition:leave="z-10 transition ease-in duration-150" x-transition:leave-start="opacity-100"
                   x-transition:leave-end="opacity-0" @click.away="closeProfileMenu" @keydown.escape="closeProfileMenu"
@@ -62,6 +63,8 @@
                   aria-label="submenu">
                   <li class="flex mt-2">
                     <form method="POST" action="" class="inline-flex items-center w-full">
+                      <input name="logout" type="hidden">
+                  
                       <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                         href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                         <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -70,12 +73,13 @@
                             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
                           </path>
                         </svg>
-                        <span>Log out</span>
+                        <span>Keluar</span>
                       </a>
                     </form>
                   </li>
                 </ul>
               </template>
+
             </li>
           </ul>
         </div>
@@ -88,10 +92,10 @@
           </h2>
           <!-- CTA -->
           <a class="mt-6 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-white bg-sp-primary-400 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-            href="#" id="add-category">
+            href="#" id="add-student">
             <div class="flex items-center gap-2">
 
-              <span><?php mysqli_num_rows($students); ?> Mahasiswa</span>
+              <span><?php count($students); ?> Mahasiswa</span>
             </div>
             <span class="flex items-center gap-2">
               <p>Tambah Calon Mahasiswa</p>
@@ -149,7 +153,7 @@
                     <td class="px-4 py-3 text-sm flex gap-3">
                       <button
                         class="px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
-                        id="delete-category" data-id="{{ $category->product_category_id }}">
+                        id="delete-student" data-id="<?= $student['student_id'] ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                           stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -158,18 +162,17 @@
                       </button>
                     </td>
                   </tr>
-                  <?php } ?>
 
                   <div
                     class="fixed inset-0 z-30 hidden items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
-                    id="modal-delete-category-{{ $category->product_category_id }}">
+                    id="modal-delete-student-<?= $student['student_id'] ?>">
                     <div
                       class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl"
                       role="dialog" id="modal">
                       <header class="flex justify-end">
                         <button
                           class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
-                          aria-label="close" id="modal-close-button" data-id="{{ $category->product_category_id }}">
+                          aria-label="close" id="modal-close-button" data-id="<?= $student['student_id'] ?>">
                           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" role="img" aria-hidden="true">
                             <path
                               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -181,24 +184,25 @@
                       <div class="mt-4 mb-6">
 
                         <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
-                          Hapus Kategori
+                          Hapus data Calon Mahasiswa
                         </p>
 
-                        <!-- Modal description -->
                         <p class="text-sm text-gray-700 dark:text-gray-400">
-                          Apakah Anda ingin menghapus kategori {{ $category->nama }}?
+                          Apakah Anda ingin menghapus data <?= $student['name'] ?>?
                         </p>
                       </div>
 
                       <footer
                         class="flex flex-col items-center justify-end gap-2 sm:flex-row bg-gray-50 dark:bg-gray-800">
-                        <button id="modal-close-button" data-id="{{ $category->product_category_id }}"
+                        <button id="modal-close-button" data-id="<?= $student['student_id'] ?>"
                           class="w-full px-5 py-3 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border border-gray-400 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
                           Batal
                         </button>
 
                         <form method="POST" action="">
-                          <button
+                          <input type="hidden" name="student_id" value="<?= $student['student_id'] ?>">
+
+                          <button name="delete_student"
                             class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red m-0">
                             Iya
                           </button>
@@ -206,6 +210,7 @@
                       </footer>
                     </div>
                   </div>
+                  <?php } ?>
 
                 </tbody>
               </table>
@@ -215,7 +220,7 @@
         </div>
 
         <div class="fixed inset-0 z-30 hidden items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
-          id="modal-add-category">
+          id="modal-add-student">
           <div
             class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl"
             role="dialog" id="modal">
@@ -223,7 +228,7 @@
             <header class="flex justify-end">
               <button
                 class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
-                aria-label="close" id="add-category-close">
+                aria-label="close" id="add-student-close">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" role="img" aria-hidden="true">
                   <path
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -298,7 +303,7 @@
                 </label>
 
                 <footer class="flex flex-col items-center justify-end gap-2 sm:flex-row bg-white dark:bg-gray-800 mt-6">
-                  <button id="add-category-close" type="button"
+                  <button id="add-student-close" type="button"
                     class="w-full px-5 py-3 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border border-gray-400 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
                     Batal
                   </button>
@@ -321,22 +326,22 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      $("body").on('click', "#delete-category", function (e) {
-        var categoryId = $(this).data(("id"));
-        $(`#modal-delete-category-${categoryId}`).removeClass('hidden').addClass('flex');
+      $("body").on('click', "#delete-student", function (e) {
+        var studentId = $(this).data(("id"));
+        $(`#modal-delete-student-${studentId}`).removeClass('hidden').addClass('flex');
       });
 
       $("body").on('click', "#modal-close-button", function (e) {
-        var categoryId = $(this).data(("id"));
-        $(`#modal-delete-category-${categoryId}`).removeClass('flex').addClass('hidden');
+        var studentId = $(this).data(("id"));
+        $(`#modal-delete-student-${studentId}`).removeClass('flex').addClass('hidden');
       });
 
-      $("body").on('click', "#add-category", function (e) {
-        $(`#modal-add-category`).removeClass('hidden').addClass('flex');
+      $("body").on('click', "#add-student", function (e) {
+        $(`#modal-add-student`).removeClass('hidden').addClass('flex');
       });
 
-      $("body").on('click', "#add-category-close", function (e) {
-        $(`#modal-add-category`).removeClass('flex').addClass('hidden');
+      $("body").on('click', "#add-student-close", function (e) {
+        $(`#modal-add-student`).removeClass('flex').addClass('hidden');
       });
     });
   </script>

@@ -42,3 +42,23 @@ function studentInsert()
     header("Location: /");
   };
 }
+
+function studentDelete()
+{
+  $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+
+  $id = filter_input(INPUT_POST, 'student_id', FILTER_VALIDATE_INT);
+
+  $sql = "DELETE FROM students WHERE student_id=:student_id";
+  $stmt = $db->prepare($sql);
+
+  $params = array(
+    ":student_id" => $id,
+  );
+
+  $deleted = $stmt->execute($params);
+
+  if ($deleted) {
+    header("Location: /");
+  };
+}
