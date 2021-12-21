@@ -125,6 +125,21 @@
                   <tr class="text-gray-700 dark:text-gray-400">
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm cursor-pointer">
+                        <?php if ($student['photo'] != "") { ?>
+                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block text-center">
+                          <img class="object-cover w-full h-full rounded-full" src="<?= $student['photo'] ?>" alt=""
+                            loading="lazy" />
+                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                        </div>
+                        <?php } else { ?>
+                        <div class="flex items-center justify-center w-8 h-8 mr-3"><svg
+                            xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                        <?php } ?>
                         <div>
                           <p class="font-semibold"><?= $student['name'] ?></p>
                           <p class="text-xs text-gray-600 dark:text-gray-400">
@@ -240,11 +255,28 @@
                       <div class="mt-4">
 
                         <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
-                          Edit Daftar Calon Mahasiswa
+                          Edit Data Calon Mahasiswa
                         </p>
 
-                        <form method="POST" action="">
+                        <form method="POST" action="" enctype="multipart/form-data">
                           <input type="hidden" name="student_id" value="<?= $student['student_id'] ?>">
+
+                          <input type="hidden" name="photo_ori" value="<?= $student['photo'] ?>">
+
+                          <label class="block mt-4 text-sm w-1/2" id="image-item">
+                            <span class="text-gray-700 dark:text-gray-400" id="image-name">
+                              Foto
+                            </span>
+
+                            <input id="image-place" type="file" name="photo" class="form-control hidden">
+                            <img class="mt-1 mb-2" style="height: 75px; width: 50%; object-fit: cover;" id="image-preview" src="<?= $student['photo'] ?>">
+
+                            <button
+                              class="px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-sp-primary-400 border border-transparent rounded active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                              id="insert-image" type="button">
+                              Ubah Gambar
+                            </button>
+                          </label>
 
                           <label class="block mt-4 text-sm">
                             <span class="text-gray-700 dark:text-gray-400">
@@ -306,7 +338,8 @@
                             </span>
                             <input
                               class="block w-full mt-1 text-sm dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
-                              name="department" value="<?= $student['department'] ?>" placeholder="Departemen" required />
+                              name="department" value="<?= $student['department'] ?>" placeholder="Departemen"
+                              required />
                           </label>
 
                           <footer
@@ -358,7 +391,22 @@
                 Tambah Daftar Calon Mahasiswa
               </p>
 
-              <form method="POST" action="">
+              <form method="POST" action="" enctype="multipart/form-data">
+
+                <label class="block mt-4 text-sm w-1/2" id="image-item">
+                  <span class="text-gray-700 dark:text-gray-400" id="image-name">
+                    Foto
+                  </span>
+
+                  <input id="image-place" type="file" name="photo" class="form-control hidden">
+                  <img class="mt-1 mb-2" id="image-preview" src="">
+
+                  <button
+                    class="px-2 py-1 text-xs font-medium leading-5 text-white transition-colors duration-150 bg-sp-primary-400 border border-transparent rounded active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                    id="insert-image" type="button">
+                    Upload Gambar
+                  </button>
+                </label>
 
                 <label class="block mt-4 text-sm">
                   <span class="text-gray-700 dark:text-gray-400">
@@ -467,6 +515,35 @@
       $("body").on('click', "#update-student-close", function (e) {
         var studentId = $(this).data(("id"));
         $(`#modal-update-student-${studentId}`).removeClass('flex').addClass('hidden');
+      });
+
+      function readURL(target, input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            target.attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $("body").on('change', "input[id*='image-place']", function (e) {
+        readURL($("#image-item").children("img"), this);
+
+        $("#image-item").children("#insert-image").html("Ubah Gambar");
+
+        $("#image-item").children("img").css({
+          "height": "75px",
+          "width": "50%",
+          "object-fit": "cover"
+        });
+      });
+
+      $("body").on("click", "#insert-image", function () {
+        var num = $(this).data("id");
+        $("#image-place").click();
       });
     });
   </script>

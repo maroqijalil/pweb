@@ -35,7 +35,8 @@ CREATE TABLE `students` (
   `gender` text,
   `religion` varchar(10) DEFAULT NULL,
   `school` varchar(255) DEFAULT NULL,
-  `department` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `department` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -98,7 +99,8 @@ COMMIT;
 --   gender text,
 --   religion varchar(10) DEFAULT NULL,
 --   school varchar(255) DEFAULT NULL,
---   department varchar(30) DEFAULT NULL
+--   department varchar(30) DEFAULT NULL,
+--   photo varchar(255) DEFAULT NULL
 -- );
 
 -- CREATE TABLE users (
