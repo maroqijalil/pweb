@@ -6,7 +6,7 @@ function login()
   $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
   if ($email && $password) {
-    $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+    $db = new PDO(DB_CONNECTION, DB_USER, DB_PASS);
 
     $sql = "SELECT * FROM users WHERE email=:email";
     $stmt = $db->prepare($sql);
@@ -40,7 +40,7 @@ function register()
     echo "Password konfirmasi tidak sama!";
   } else {
     if ($email && $password && $name) {
-      $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+      $db = new PDO(DB_CONNECTION, DB_USER, DB_PASS);
 
       $sql = "INSERT INTO users (name, email, password) 
               VALUES (:name, :email, :password)";

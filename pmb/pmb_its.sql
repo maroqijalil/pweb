@@ -89,3 +89,21 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- POSTGRESQL
+-- CREATE TABLE students (
+--   student_id SERIAL PRIMARY KEY,
+--   name varchar(255) DEFAULT NULL,
+--   address varchar(255) DEFAULT NULL,
+--   gender text,
+--   religion varchar(10) DEFAULT NULL,
+--   school varchar(255) DEFAULT NULL,
+--   department varchar(30) DEFAULT NULL
+-- );
+
+-- CREATE TABLE users (
+--   user_id SERIAL PRIMARY KEY,
+--   name varchar(255) DEFAULT NULL,
+--   email varchar(255) DEFAULT NULL,
+--   password varchar(255) DEFAULT NULL
+-- );
